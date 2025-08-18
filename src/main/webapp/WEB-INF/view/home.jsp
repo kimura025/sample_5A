@@ -34,7 +34,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="card mb-3" id="item_info">
+		<div class="card mb-3" id="item_info"></div>
 			<div class="card-header">商品選択</div>
 			<div class="card-body" >
 				<div class="gap-2 d-md-flex">
@@ -60,11 +60,6 @@
 							<th class="table-primary w-25">価格</th>
 							<td id="item_price"></td>
 						</tr>
-						<tr>
-							<th class="table-primary w-25">登録状態</th>
-							<td id="item_regist"></td>
-						</tr>
-						
 					</table>
 				</div>
 			</div>

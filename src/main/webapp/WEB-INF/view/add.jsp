@@ -42,6 +42,10 @@
 		                <label class="form-label" for="item_price">価格：</label>
 		                <input type="number" class="form-control" id="item_price" name="item_price"
 		                 min="1" max="9999999999" maxlength="10" required>
+	            	</div> 
+	            	<div class="mb-3">
+	            	<label class="form-label" for="item_regist">仮登録：</label>
+	            	<input type="checkbox" id="item_regist" name="item_regist"></input>
 	            	</div>
 				</div>
 				<div class="d-md-flex justify-content-md-end">
