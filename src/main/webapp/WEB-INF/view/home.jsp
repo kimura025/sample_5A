@@ -60,15 +60,6 @@
 							<th class="table-primary w-25">価格</th>
 							<td id="item_price"></td>
 						</tr>
-						<tr>
-						<th class="table-primary w-25">登録状態</th>
-						<td>
-						<c:choose>
-						<c:when test="${item.itemRegist}">仮登録</c:when>
-						<c:otherwise>本登録</c:otherwise>
-						</c:choose>
-						</td>
-						</tr>
 					</table>
 				</div>
 			</div>

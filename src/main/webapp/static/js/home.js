@@ -94,3 +94,29 @@ function initItemDetail() {
 	}
 
 }
+
+//足したよ＿麻衣
+function validateForm() {
+  const name = document.getElementById("productName").value;
+  const price = parseInt(document.getElementById("productPrice").value, 10);
+ 
+  // 「水」が含まれていて、価格が10000以上ならエラー
+  if (name.includes("水") && price >= 10000) {
+    alert("商品名に「水」が含まれている場合、価格は10,000未満にしてください。");
+    return false; // フォーム送信をブロック
+  }
+ 
+  return true; // 問題なければ送信許可
+}
+ 
+// フォーム送信イベントにバリデーションを紐づける
+window.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("form");
+  if (form) {
+    form.addEventListener("submit", (event) => {
+      if (!validateForm()) {
+        event.preventDefault(); // 送信をキャンセル
+      }
+    });
+  }
+});
