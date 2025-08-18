@@ -18,7 +18,7 @@ import java.util.List;
 
 import sample.model.data.Item;
 import sample.model.data.Shop;
-
+//
 /**
  * 商店テーブルDAOクラス
  */
