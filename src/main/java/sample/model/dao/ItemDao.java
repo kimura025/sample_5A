@@ -144,9 +144,9 @@ public class ItemDao {
 			stmt.setString(1, item.getItemName());
 			stmt.setString(2, item.getItemDescribe());
 			stmt.setInt(3, item.getItemPrice());
-			stmt.setInt(4, item.getShopId());
-			stmt.setInt(5, item.getItemId());
-			stmt.setBoolean(6,item.isItemRegist());
+            stmt.setBoolean(4,item.isItemRegist());
+			stmt.setInt(5, item.getShopId());
+			stmt.setInt(6, item.getItemId());
 
 			stmt.executeUpdate();
 

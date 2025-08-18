@@ -44,34 +44,39 @@ public class EditItemCompleteController extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		req.setCharacterEncoding("UTF-8");
-		
+
 		String next = "/WEB-INF/view/home.jsp";
-		
+
 		Item item = new Item();
 		item.setShopId(Integer.parseInt(req.getParameter("shop_id")));
 		item.setItemId(Integer.parseInt(req.getParameter("item_id")));
 		item.setItemName(req.getParameter("item_name"));
 		item.setItemDescribe(req.getParameter("item_describe"));
 		item.setItemPrice(Integer.parseInt(req.getParameter("item_price")));
-		
+		Boolean registTF = false;
+        if(req.getParameter("item_regist") != null) {
+            registTF = true;
+        }
+        item.setItemRegist(registTF);
+
 		try (Connection con = ConnectionManager.getConnection()){
-			
+
 			ItemDao itemDao = new ItemDao(con);
 			itemDao.update(item);
-		
+
 			ShopDao dao = new ShopDao(con);
 			List<Shop> shopList = dao.selectAll();
 
 			ObjectMapper mapper = new ObjectMapper();
-			String shopListJson = mapper.writeValueAsString(shopList);	
+			String shopListJson = mapper.writeValueAsString(shopList);
 
 			req.setAttribute("shopList", shopListJson);
-			
+
 			req.setAttribute("selectedShopId", item.getShopId());
 			req.setAttribute("selectedItemId", item.getItemId());
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			next = ERROR_PAGE;
@@ -81,5 +86,5 @@ public class EditItemCompleteController extends HttpServlet {
 		rd.forward(req, resp);
 
 	}
-	
+
 }
