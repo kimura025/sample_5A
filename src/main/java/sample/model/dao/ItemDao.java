@@ -44,7 +44,7 @@ public class ItemDao {
 	 */
 	public Item select(int shopId, int itemId) throws SQLException {
 
-		String sql = "SELECT shop_id, item_id, item_name, item_describe, item_price FROM item"
+		String sql = "SELECT shop_id, item_id, item_name, item_describe, item_price, item_regist FROM item"
 				+ " WHERE shop_id = ? AND item_id = ?";
 
 		Item item = null;
@@ -81,8 +81,8 @@ public class ItemDao {
 		int itemId = selectNewItemId(item.getShopId());
 		item.setItemId(itemId);
 
-		String sql = "INSERT INTO item(shop_id, item_id, item_name, item_describe, item_price)"
-				+ " VALUES(?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO item(shop_id, item_id, item_name, item_describe, item_price,item_regist)"
+				+ " VALUES(?, ?, ?, ?, ?,?)";
 
 		try(PreparedStatement stmt = con.prepareStatement(sql)) {
 
@@ -91,6 +91,7 @@ public class ItemDao {
 			stmt.setString(3, item.getItemName());
 			stmt.setString(4, item.getItemDescribe());
 			stmt.setInt(5, item.getItemPrice());
+			stmt.setBoolean(6,item.isItemRegist());
 
 			stmt.executeUpdate();
 
@@ -135,7 +136,7 @@ public class ItemDao {
 	 */
 	public void update(Item item) throws SQLException {
 
-		String sql = "UPDATE item set item_name = ?, item_describe = ?, item_price = ?"
+		String sql = "UPDATE item set item_name = ?, item_describe = ?, item_price = ?,item_regist = ?"
 				+ " WHERE shop_id = ? AND item_id = ?";
 
 		try(PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -145,6 +146,7 @@ public class ItemDao {
 			stmt.setInt(3, item.getItemPrice());
 			stmt.setInt(4, item.getShopId());
 			stmt.setInt(5, item.getItemId());
+			stmt.setBoolean(6,item.isItemRegist());
 
 			stmt.executeUpdate();
 
