@@ -17,6 +17,7 @@ CREATE TABLE sampledb.item (
   item_name VARCHAR(20) NOT NULL,
   item_describe VARCHAR(200) NOT NULL,
   item_price INT NOT NULL,
+  item_regist BOOLEAN NOT NULL,
   PRIMARY KEY (shop_id , item_id),
   FOREIGN KEY (shop_id) REFERENCES sampledb.shop(shop_id)
 );
