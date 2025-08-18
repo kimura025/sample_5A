@@ -36,37 +36,38 @@ public class ShopDao {
 	public ShopDao(Connection con) {
 		this.con = con;
 	}
-	
+
 	/**
 	 * 商店テーブルと商品テーブルから、すべての商店情報と商店に紐づくすべての商品情報を取得する。
 	 * @return 商店に紐づく商品情報を保持した商店リスト
 	 * @throws SQLException DBエラーが発生した場合
 	 */
 	public List<Shop> selectAll() throws SQLException {
-		
+
 		String sql = "SELECT"
 				+ " shop.shop_id AS shop_id,"
 				+ " shop_name,"
 				+ " item_id,"
 				+ " item_name,"
 				+ " item_describe,"
-				+ " item_price"
+				+ " item_price,"
+				+ "item_regist"
 				+ " FROM shop"
 				+ " LEFT OUTER JOIN item ON shop.shop_id = item.shop_id"
 				+ " ORDER BY shop.shop_id, item_id";
-		
+
 		List<Shop> shopList = new ArrayList<>();
 		List<Item> itemList = null;
-		
+
 		int lastShopId = 0;
 		Shop shop = null;
-		
+
 		try(PreparedStatement stmt = con.prepareStatement(sql)) {
-			
+
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				int shopId = rs.getInt("shop_id");
-				
+
 				if (lastShopId == 0 || shopId != lastShopId) {
 					shop = new Shop();
 					shop.setShopId(shopId);
@@ -75,28 +76,29 @@ public class ShopDao {
 					shop.setItemList(itemList);
 					shopList.add(shop);
 				}
-				
+
 				int itemId = rs.getInt("item_id");
 				if (itemId != 0) {
 					Item item = new Item();
 					item.setShopId(shopId);
 					item.setItemId(itemId);
-					item.setItemName(rs.getString("item_name"));					
+					item.setItemName(rs.getString("item_name"));
 					item.setItemDescribe(rs.getString("item_describe"));
 					item.setItemPrice(rs.getInt("item_price"));
+					item.setItemRegist(rs.getBoolean("item_regist"));
 					itemList.add(item);
 				}
-				
+
 				lastShopId = shopId;
 
 			}
-			
+
 		}
-		
+
 		return shopList;
-		
+
 	}
-	
+
 	/**
 	 * 商店IDをキーに商店テーブルを検索する。
 	 * @param shopId 商店ID
@@ -104,15 +106,15 @@ public class ShopDao {
 	 * @throws SQLException DBエラーが発生した場合
 	 */
 	public Shop select(int shopId) throws SQLException {
-		
+
 		String sql = "SELECT shop_id, shop_name FROM shop WHERE shop_id = ?";
 
 		Shop shop = null;
-		
+
 		try(PreparedStatement stmt = con.prepareStatement(sql)) {
-			
+
 			stmt.setInt(1, shopId);
-			
+
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				shop = new Shop();
@@ -120,9 +122,9 @@ public class ShopDao {
 				shop.setShopName(rs.getString("shop_name"));
 			}
 		}
-		
+
 		return shop;
-		
+
 	}
-	
+
 }
