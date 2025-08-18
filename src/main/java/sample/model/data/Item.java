@@ -23,7 +23,7 @@ public class Item {
 	 * 商品ID
 	 */
 	private int itemId;
-	
+
 	/**
 	 * 商品名
 	 */
@@ -38,8 +38,27 @@ public class Item {
 	 * 商品価格
 	 */
 	private int itemPrice;
-	
+
 	/**
+     * 商品価格
+     */
+	private boolean itemRegist;
+
+	/**
+     * @return itemRegist
+     */
+    public boolean isItemRegist() {
+        return itemRegist;
+    }
+
+    /**
+     * @param itemRegist セットする itemRegist
+     */
+    public void setItemRegist(boolean itemRegist) {
+        this.itemRegist = itemRegist;
+    }
+
+    /**
 	 * 商店IDを取得する。
 	 * @return 商店ID
 	 */
@@ -54,7 +73,7 @@ public class Item {
 	public void setShopId(int shopId) {
 		this.shopId = shopId;
 	}
-	
+
 	/**
 	 * 商品IDを取得する。
 	 * @return 商品ID
