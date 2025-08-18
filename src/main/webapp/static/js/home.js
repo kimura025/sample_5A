@@ -84,7 +84,11 @@ function initItemDetail() {
 		document.querySelector("#item_name").textContent = selectedItem.itemName;
 		document.querySelector("#item_describe").textContent = selectedItem.itemDescribe;
 		document.querySelector("#item_price").textContent = selectedItem.itemPrice;
-		document.querySelector("#item_regist").textContent = selectedItem.itemRegist;
+		let regist = "仮登録";
+		if(selectedItem.itemRegist == false) {
+			regist = "本登録";
+		}
+		document.querySelector("#item_regist").textContent = regist;
 		// 商品詳細情報を表示・商品が存在しない場合のメッセージを非表示
 		document.querySelector("#item_detail_area").style.display = "block";
 		document.querySelector("#item_not_exists_area").style.display = "none";
